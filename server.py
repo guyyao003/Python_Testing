@@ -51,9 +51,20 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
-    flash('Great-booking complete!')
-    return render_template('welcome.html', club=club, competitions=competitions)
+    if placesRequired <= 0:
+        flash("le nombre fourni n'est pas valide.", 'error')
+        return redirect(url_for('book',club=club['name'],competition=competition['name']))  # Redirigez vers la page où l'erreur doit être affichée
+    if placesRequired <= int(club['points']) and placesRequired <= 12:
+        competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
+        club['points'] = int(club['points']) - placesRequired
+        flash('Great-booking complete!')
+        return render_template('welcome.html', club=club, competitions=competitions)  # Redirigez vers la page où l'erreur doit être affichée
+    if placesRequired >= int(competition['numberOfPlaces']):
+        flash("le nombre fourni est superieur au nombre de place.", 'error')
+        return redirect(url_for('book',club=club['name'],competition=competition['name']))  # Redirigez vers la page où l'erreur doit être affichée
+    if placesRequired > int(club['points']):
+        flash("le nombre fourni est superieur au nombre de points du club.", 'error')
+        return redirect(url_for('book',club=club['name'],competition=competition['name']))  # Redirigez vers la page où l'erreur doit être affichée
 
 
 # TODO: Add route for points display
