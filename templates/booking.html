@@ -51,10 +51,26 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-right: 10px;
         }
 
         button[type="submit"]:hover {
             background-color: #0b5ed7; /* Bleu plus foncé */
+        }
+
+        .back-button {
+            background-color: #6c757d; /* Gris */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #5c636a; /* Gris plus foncé */
         }
     </style>
 </head>
@@ -67,6 +83,7 @@
         <label for="places">Voulez-vous combien de places?</label>
         <input type="number" name="places" required>
         <button type="submit">Réserver</button>
+        <a href="javascript:history.back()" class="back-button">Retour</a>
     </form>
 </body>
 </html>
