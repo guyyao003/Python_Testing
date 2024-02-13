@@ -61,7 +61,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Bienvenue, {{club['email']}}</h2>
+        <h2>Welcome, {{club['email']}}</h2>
         <a href="{{url_for('logout')}}">Se déconnecter</a>
 
         {% with messages = get_flashed_messages() %}
